@@ -1,0 +1,205 @@
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --border: #e2e8f0;
+  --nav-h: 60px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 100;
+  transition: background 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+nav.dark {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+nav.light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+}
+
+nav.dark .nav-brand { color: #fff; }
+nav.dark .nav-links a { color: rgba(255, 255, 255, 0.65); }
+nav.dark .nav-links a:hover,
+nav.dark .nav-links a.active { color: #fff; }
+
+nav.light .nav-brand { color: var(--text); }
+nav.light .nav-links a { color: var(--muted); }
+nav.light .nav-links a:hover,
+nav.light .nav-links a.active { color: var(--accent); }
+
+.nav-brand {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.page-section {
+  padding: 5rem 0 4rem;
+}
+
+/* ── Typography ── */
+.eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+p { color: var(--muted); font-size: 0.975rem; line-height: 1.7; }
+
+/* ── Tags ── */
+.tag {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 99px;
+  padding: 0.18rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 0.2rem 0.2rem 0 0;
+}
+
+/* ── Cards ── */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+}
+
+.card-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.card-desc { margin-top: 0.75rem; }
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.83rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.card-link:hover { text-decoration: underline; }
+
+/* ── Page header (non-home pages) ── */
+.page-header {
+  padding-top: calc(var(--nav-h) + 4rem);
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header p { margin-top: 0.5rem; }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+}
+
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--accent); }
+
+.footer-copy {
+  display: block;
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin-top: 0.65rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  nav { padding: 0 1rem; }
+  .nav-links { gap: 1rem; }
+  .container { padding: 0 1.25rem; }
+  .page-header { padding-top: calc(var(--nav-h) + 2.5rem); }
+}

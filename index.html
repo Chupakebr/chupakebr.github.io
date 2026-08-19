@@ -1,154 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="icon" type="image/png" href="/Rodion 96x96.png" sizes="96x96" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to my Galaxy!</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: black;
-        }
+  <link rel="icon" type="image/png" href="/Rodion 96x96.png" sizes="96x96" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodion Rodionov — Senior Technical Support Engineer</title>
+  <meta name="description" content="Senior SAP Technical Support Engineer specializing in SAP Cloud ALM, DevOps, application lifecycle management, and hybrid cloud transformation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Hero */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
 
-        canvas {
-            display: block;
-        }
-    </style>
+    #galaxyCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 2rem;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-content h1 {
+      color: #fff;
+      font-size: clamp(2.5rem, 6vw, 3.75rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.875rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5); }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.17); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .scroll-hint svg { animation: bounce 2.2s ease-in-out infinite; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* About section */
+    #about {
+      background: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-inner {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .about-photo {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+
+    .about-text p { margin-bottom: 1rem; }
+    .about-text p:last-of-type { margin-bottom: 0; }
+
+    .skills-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin: 1.25rem 0 0.4rem;
+    }
+
+    @media (max-width: 500px) {
+      .about-inner { flex-direction: column; gap: 1.25rem; }
+    }
+  </style>
 </head>
-
 <body>
+  <nav id="mainNav" class="dark">
+    <a href="/" class="nav-brand">Rodion Rodionov</a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="writing.html">Writing</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
     <canvas id="galaxyCanvas"></canvas>
-    <script>
-        const canvas = document.getElementById('galaxyCanvas');
-        const ctx = canvas.getContext('2d');
+    <div class="hero-content">
+      <span class="hero-eyebrow">SAP Labs France</span>
+      <h1>Rodion Rodionov</h1>
+      <p class="hero-bio">Senior Technical Support Engineer specializing in SAP Cloud ALM, DevOps, and hybrid cloud transformation — helping global enterprises modernize their SAP landscapes.</p>
+      <div class="hero-actions">
+        <a href="projects.html" class="btn btn-primary">View Projects</a>
+        <a href="writing.html" class="btn btn-ghost">Read Writing</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+  <section id="about">
+    <div class="container page-section">
+      <span class="eyebrow">About</span>
+      <div class="about-inner">
+        <img src="/Rodion 96x96.png" alt="Rodion Rodionov" class="about-photo">
+        <div class="about-text">
+          <p>Senior SAP Technical Support Engineer specializing in SAP Cloud ALM, DevOps, application lifecycle management, and hybrid cloud transformation, helping global enterprises modernize and optimize their SAP landscapes.</p>
+          <p>Based at SAP Labs France, I work with enterprise customers on complex ALM challenges — focusing on Focused Build implementations, SAP BTP integrations, and automated release management.</p>
+          <p class="skills-label">Specializations</p>
+          <span class="tag">SAP Cloud ALM</span>
+          <span class="tag">DevOps</span>
+          <span class="tag">Application Lifecycle Management</span>
+          <span class="tag">Hybrid Cloud</span>
+          <span class="tag">SAP BTP</span>
+          <span class="tag">Focused Build</span>
+          <span class="tag">Release Management</span>
+          <span class="tag">SAP Cloud Integration</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const stars = [];
-        const numStars = 7000;
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        const numArms = 4;
-        const armSpread = 0.2;
-        const rotationFactor = 2.5;
-        const bulgeRadius = canvas.width / 12;
-        const bulgeStars = numStars * 0.15;
-        const tiltAngle = Math.PI / 6; // Tilt angle for edge-on perspective
+  <footer>
+    <a href="https://github.com/Chupakebr" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/rodionovr/" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="footer-copy">© 2026 Rodion Rodionov · www.rodionov.fr</span>
+  </footer>
 
-        function createStar() {
-            const isBulgeStar = Math.random() < (bulgeStars / numStars);
-            const armOffset = Math.random() * armSpread - armSpread / 2;
-            const armIndex = Math.floor(Math.random() * numArms);
-            const baseAngle = armIndex * (2 * Math.PI / numArms);
-            const angle = baseAngle + armOffset + Math.random() * 0.5;
-            const radius = isBulgeStar ? Math.random() * bulgeRadius : Math.sqrt(Math.random()) * (canvas.width / 2);
-            const cr = Math.random() * 2.5 + 0.5;
-            const baseSpeed = (canvas.width / 1000000);
-            const speed = baseSpeed * Math.sqrt((canvas.width / 2) / Math.max(radius, 5));
+  <script>
+    // Nav: dark over hero, light after
+    const nav = document.getElementById('mainNav');
+    function updateNav() {
+      const heroH = document.getElementById('hero').offsetHeight;
+      nav.className = window.scrollY >= heroH - 80 ? 'light' : 'dark';
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
 
-            const brightness = isBulgeStar ? 0.8 : 0.6 + Math.random() * 0.2;
-            const color = getStarColor(brightness);
+    // Galaxy animation
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    const numStars = 7000;
+    const numArms = 4;
+    const armSpread = 0.2;
+    const tiltAngle = Math.PI / 6;
+    const stars = [];
 
-            return {
-                x: radius * Math.cos(angle),
-                y: radius * Math.sin(angle),
-                z: (Math.random() - 0.5) * canvas.width / 10,
-                angle: angle,
-                radius: radius,
-                cr: cr,
-                speed: speed,
-                brightness: brightness,
-                color: color
-            };
-        }
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
 
-        function getStarColor(brightness) {
-            const colors = [
-                { range: [0, 3000], color: `rgba(255, 180, 140, ${brightness})` }, // Orange
-                { range: [3000, 4500], color: `rgba(255, 215, 180, ${brightness})` }, // Yellow-orange
-                { range: [4500, 6000], color: `rgba(255, 255, 240, ${brightness})` }, // Yellow-white
-                { range: [6000, 7500], color: `rgba(200, 230, 255, ${brightness})` }, // White-blue
-                { range: [7500, 30000], color: `rgba(180, 210, 255, ${brightness})` } // Blue
-            ];
-            const temp = Math.random() * 30000;
-            for (const color of colors) {
-                if (temp >= color.range[0] && temp < color.range[1]) {
-                    return color.color;
-                }
-            }
-            return `rgba(255, 255, 255, ${brightness})`; // Default white
-        }
+    function getStarColor(brightness) {
+      const palette = [
+        [0, 3000, `rgba(255,180,140,${brightness})`],
+        [3000, 4500, `rgba(255,215,180,${brightness})`],
+        [4500, 6000, `rgba(255,255,240,${brightness})`],
+        [6000, 7500, `rgba(200,230,255,${brightness})`],
+        [7500, 30000, `rgba(180,210,255,${brightness})`]
+      ];
+      const temp = Math.random() * 30000;
+      for (const [lo, hi, col] of palette) {
+        if (temp >= lo && temp < hi) return col;
+      }
+      return `rgba(255,255,255,${brightness})`;
+    }
 
-        function projectStar(star) {
-            const cosTilt = Math.cos(tiltAngle);
-            const sinTilt = Math.sin(tiltAngle);
+    function makeStar() {
+      const bulgeR = canvas.width / 12;
+      const isBulge = Math.random() < 0.15;
+      const armIdx = Math.floor(Math.random() * numArms);
+      const offset = Math.random() * armSpread - armSpread / 2;
+      const angle = armIdx * (2 * Math.PI / numArms) + offset + Math.random() * 0.5;
+      const radius = isBulge ? Math.random() * bulgeR : Math.sqrt(Math.random()) * (canvas.width / 2);
+      const brightness = isBulge ? 0.8 : 0.6 + Math.random() * 0.2;
+      const speed = (canvas.width / 1000000) * Math.sqrt((canvas.width / 2) / Math.max(radius, 5));
+      return {
+        angle, radius,
+        x: radius * Math.cos(angle),
+        y: radius * Math.sin(angle),
+        z: (Math.random() - 0.5) * canvas.width / 10,
+        cr: Math.random() * 2.5 + 0.5,
+        speed,
+        color: getStarColor(brightness)
+      };
+    }
 
-            const xProjected = star.x;
-            const yProjected = star.y * cosTilt - star.z * sinTilt;
+    function initStars() {
+      stars.length = 0;
+      for (let i = 0; i < numStars; i++) stars.push(makeStar());
+    }
+    initStars();
 
-            return {
-                x: centerX + xProjected,
-                y: centerY + yProjected,
-                cr: star.cr,
-                color: star.color
-            };
-        }
+    const cos = Math.cos(tiltAngle);
+    const sin = Math.sin(tiltAngle);
 
-        function drawStar(star) {
-            const projected = projectStar(star);
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.beginPath();
-            ctx.arc(projected.x, projected.y, projected.cr, 0, Math.PI * 2);
-            ctx.fillStyle = projected.color;
-            ctx.fill();
-        }
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width / 2);
+      grad.addColorStop(0, 'rgba(255,255,255,0.1)');
+      grad.addColorStop(0.3, 'rgba(100,100,200,0.03)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        function updateStars() {
-            for (const star of stars) {
-                star.angle += star.speed;
-                star.x = star.radius * Math.cos(star.angle);
-                star.y = star.radius * Math.sin(star.angle);
-            }
-        }
+      for (const s of stars) {
+        s.angle += s.speed;
+        s.x = s.radius * Math.cos(s.angle);
+        s.y = s.radius * Math.sin(s.angle);
+        ctx.beginPath();
+        ctx.arc(cx + s.x, cy + s.y * cos - s.z * sin, s.cr, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
 
-        function drawDust() {
-            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, canvas.width / 2);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-            gradient.addColorStop(0.3, 'rgba(100, 100, 200, 0.03)');
-            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawDust();
-            updateStars();
-            stars.forEach(drawStar);
-            requestAnimationFrame(loop);
-        }
-
-        for (let i = 0; i < numStars; i++) {
-            stars.push(createStar());
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            stars.length = 0;
-            for (let i = 0; i < numStars; i++) {
-                stars.push(createStar());
-            }
-        });
-
-        loop();
-    </script>
+    window.addEventListener('resize', () => { resize(); initStars(); });
+  </script>
 </body>
-
-
 </html>
