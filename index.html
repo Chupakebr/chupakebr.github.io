@@ -13,59 +13,49 @@
   <style>
     /* Hero */
     #hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      overflow: hidden;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: #000;
+      padding-top: var(--nav-h);
+      background: #fff;
     }
 
-    #galaxyCanvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      padding: 5rem 0;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 0 2rem;
-      max-width: 680px;
+    .hero-text { flex: 1; }
+
+    .hero-text .eyebrow { margin-bottom: 0.85rem; }
+
+    .hero-text h1 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      margin-bottom: 0.5rem;
     }
 
-    .hero-eyebrow {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.45);
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-content h1 {
-      color: #fff;
-      font-size: clamp(2.5rem, 6vw, 3.75rem);
+    .hero-title {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 500;
       margin-bottom: 1.25rem;
     }
 
     .hero-bio {
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 1.05rem;
-      max-width: 520px;
-      margin: 0 auto 2.25rem;
-      line-height: 1.65;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 2rem;
     }
 
     .hero-actions {
       display: flex;
       gap: 0.875rem;
-      justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
 
     .btn {
@@ -75,8 +65,8 @@
       font-size: 0.875rem;
       font-weight: 600;
       text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
       font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     }
 
     .btn:hover { transform: translateY(-1px); }
@@ -84,67 +74,57 @@
     .btn-primary {
       background: #2563eb;
       color: #fff;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
     }
 
-    .btn-primary:hover { box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5); }
+    .btn-primary:hover { box-shadow: 0 6px 20px rgba(37, 99, 235, 0.42); }
 
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(8px);
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
     }
 
-    .btn-ghost:hover { background: rgba(255, 255, 255, 0.17); }
+    .btn-outline:hover { border-color: #93c5fd; color: var(--accent); }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      color: rgba(255, 255, 255, 0.35);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .hero-socials {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
+      gap: 1.25rem;
     }
 
-    .scroll-hint svg { animation: bounce 2.2s ease-in-out infinite; }
+    .hero-socials a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+    }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
+    .hero-socials a:hover { color: var(--accent); }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .hero-photo {
+      width: 320px;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
     }
 
     /* About section */
     #about {
-      background: #fff;
-      position: relative;
-      z-index: 2;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-
-    .about-inner {
-      display: flex;
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
-
-    .about-photo {
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 2px solid var(--border);
-    }
-
-    .about-text p { margin-bottom: 1rem; }
-    .about-text p:last-of-type { margin-bottom: 0; }
 
     .skills-label {
       font-size: 0.68rem;
@@ -152,16 +132,30 @@
       letter-spacing: 0.09em;
       text-transform: uppercase;
       color: #94a3b8;
-      margin: 1.25rem 0 0.4rem;
+      margin: 1.25rem 0 0.5rem;
     }
 
-    @media (max-width: 500px) {
-      .about-inner { flex-direction: column; gap: 1.25rem; }
+    @media (max-width: 700px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+        gap: 2.5rem;
+        padding: 3rem 0;
+        text-align: center;
+      }
+
+      .hero-bio { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-socials { justify-content: center; }
+
+      .hero-photo {
+        width: 200px;
+        height: 240px;
+      }
     }
   </style>
 </head>
 <body>
-  <nav id="mainNav" class="dark">
+  <nav class="light">
     <a href="/" class="nav-brand">Rodion Rodionov</a>
     <ul class="nav-links">
       <li><a href="/" class="active">Home</a></li>
@@ -171,43 +165,48 @@
   </nav>
 
   <section id="hero">
-    <canvas id="galaxyCanvas"></canvas>
-    <div class="hero-content">
-      <span class="hero-eyebrow">SAP Labs France</span>
-      <h1>Rodion Rodionov</h1>
-      <p class="hero-bio">Senior Technical Support Engineer specializing in SAP Cloud ALM, DevOps, and hybrid cloud transformation — helping global enterprises modernize their SAP landscapes.</p>
-      <div class="hero-actions">
-        <a href="projects.html" class="btn btn-primary">View Projects</a>
-        <a href="writing.html" class="btn btn-ghost">Read Writing</a>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <span class="eyebrow">SAP Labs France</span>
+          <h1>Rodion Rodionov</h1>
+          <p class="hero-title">Senior Technical Support Engineer</p>
+          <p class="hero-bio">Specializing in SAP Cloud ALM, DevOps, application lifecycle management, and hybrid cloud transformation — helping global enterprises modernize and optimize their SAP landscapes.</p>
+          <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary">View Projects</a>
+            <a href="writing.html" class="btn btn-outline">Read Writing</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://github.com/Chupakebr" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/rodionovr/" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <img src="/Rodion.jpg" alt="Rodion Rodionov" class="hero-photo">
+        </div>
       </div>
-    </div>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
     </div>
   </section>
 
   <section id="about">
     <div class="container page-section">
       <span class="eyebrow">About</span>
-      <div class="about-inner">
-        <img src="/Rodion 96x96.png" alt="Rodion Rodionov" class="about-photo">
-        <div class="about-text">
-          <p>Senior SAP Technical Support Engineer specializing in SAP Cloud ALM, DevOps, application lifecycle management, and hybrid cloud transformation, helping global enterprises modernize and optimize their SAP landscapes.</p>
-          <p>Based at SAP Labs France, I work with enterprise customers on complex ALM challenges — focusing on Focused Build implementations, SAP BTP integrations, and automated release management.</p>
-          <p class="skills-label">Specializations</p>
-          <span class="tag">SAP Cloud ALM</span>
-          <span class="tag">DevOps</span>
-          <span class="tag">Application Lifecycle Management</span>
-          <span class="tag">Hybrid Cloud</span>
-          <span class="tag">SAP BTP</span>
-          <span class="tag">Focused Build</span>
-          <span class="tag">Release Management</span>
-          <span class="tag">SAP Cloud Integration</span>
-        </div>
-      </div>
+      <p style="max-width: 580px;">Senior SAP Technical Support Engineer with deep expertise in SAP Cloud ALM, DevOps, and hybrid cloud transformation. Based at SAP Labs France, I work with global enterprise customers on complex ALM challenges — from Focused Build implementations to SAP BTP integrations and automated release management.</p>
+      <p class="skills-label">Specializations</p>
+      <span class="tag">SAP Cloud ALM</span>
+      <span class="tag">DevOps</span>
+      <span class="tag">Application Lifecycle Management</span>
+      <span class="tag">Hybrid Cloud</span>
+      <span class="tag">SAP BTP</span>
+      <span class="tag">Focused Build</span>
+      <span class="tag">Release Management</span>
+      <span class="tag">SAP Cloud Integration</span>
     </div>
   </section>
 
@@ -216,100 +215,5 @@
     <a href="https://www.linkedin.com/in/rodionovr/" target="_blank" rel="noopener">LinkedIn</a>
     <span class="footer-copy">© 2026 Rodion Rodionov · www.rodionov.fr</span>
   </footer>
-
-  <script>
-    // Nav: dark over hero, light after
-    const nav = document.getElementById('mainNav');
-    function updateNav() {
-      const heroH = document.getElementById('hero').offsetHeight;
-      nav.className = window.scrollY >= heroH - 80 ? 'light' : 'dark';
-    }
-    window.addEventListener('scroll', updateNav, { passive: true });
-
-    // Galaxy animation
-    const canvas = document.getElementById('galaxyCanvas');
-    const ctx = canvas.getContext('2d');
-    const numStars = 7000;
-    const numArms = 4;
-    const armSpread = 0.2;
-    const tiltAngle = Math.PI / 6;
-    const stars = [];
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-
-    function getStarColor(brightness) {
-      const palette = [
-        [0, 3000, `rgba(255,180,140,${brightness})`],
-        [3000, 4500, `rgba(255,215,180,${brightness})`],
-        [4500, 6000, `rgba(255,255,240,${brightness})`],
-        [6000, 7500, `rgba(200,230,255,${brightness})`],
-        [7500, 30000, `rgba(180,210,255,${brightness})`]
-      ];
-      const temp = Math.random() * 30000;
-      for (const [lo, hi, col] of palette) {
-        if (temp >= lo && temp < hi) return col;
-      }
-      return `rgba(255,255,255,${brightness})`;
-    }
-
-    function makeStar() {
-      const bulgeR = canvas.width / 12;
-      const isBulge = Math.random() < 0.15;
-      const armIdx = Math.floor(Math.random() * numArms);
-      const offset = Math.random() * armSpread - armSpread / 2;
-      const angle = armIdx * (2 * Math.PI / numArms) + offset + Math.random() * 0.5;
-      const radius = isBulge ? Math.random() * bulgeR : Math.sqrt(Math.random()) * (canvas.width / 2);
-      const brightness = isBulge ? 0.8 : 0.6 + Math.random() * 0.2;
-      const speed = (canvas.width / 1000000) * Math.sqrt((canvas.width / 2) / Math.max(radius, 5));
-      return {
-        angle, radius,
-        x: radius * Math.cos(angle),
-        y: radius * Math.sin(angle),
-        z: (Math.random() - 0.5) * canvas.width / 10,
-        cr: Math.random() * 2.5 + 0.5,
-        speed,
-        color: getStarColor(brightness)
-      };
-    }
-
-    function initStars() {
-      stars.length = 0;
-      for (let i = 0; i < numStars; i++) stars.push(makeStar());
-    }
-    initStars();
-
-    const cos = Math.cos(tiltAngle);
-    const sin = Math.sin(tiltAngle);
-
-    function loop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const cx = canvas.width / 2, cy = canvas.height / 2;
-      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width / 2);
-      grad.addColorStop(0, 'rgba(255,255,255,0.1)');
-      grad.addColorStop(0.3, 'rgba(100,100,200,0.03)');
-      grad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      for (const s of stars) {
-        s.angle += s.speed;
-        s.x = s.radius * Math.cos(s.angle);
-        s.y = s.radius * Math.sin(s.angle);
-        ctx.beginPath();
-        ctx.arc(cx + s.x, cy + s.y * cos - s.z * sin, s.cr, 0, Math.PI * 2);
-        ctx.fillStyle = s.color;
-        ctx.fill();
-      }
-      requestAnimationFrame(loop);
-    }
-    loop();
-
-    window.addEventListener('resize', () => { resize(); initStars(); });
-  </script>
 </body>
 </html>
